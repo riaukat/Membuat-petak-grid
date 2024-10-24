@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Tambah Daftar</string>
+    <string name="tambahdata1">Kefamenanu</string>
+    <string name="tambahdata2">Atambua</string>
+    <string name="tambahdata3">Kupang</string>
+    <string name="tambahdata4">Yogyakarta</string>
+    <string name="tambahdata5">Jakarta</string>
+    <string name="tambahdata6">Bandung</string>
+    <string name="tambahdata7">Semarang</string>
+    <string name="tambahdata8">Surabaya</string>
+    <string name="tambahdata9">Malang</string>
+    <string name="tambahdata10">Solo</string>
+    <string name="tambahdata11">Medan</string>
+    <string name="batak">Batak</string>
+    <string name="ambon">Ambon</string>
+    <string name="papua">Papua</string>
+    <string name="maluku">Maluku</string>
+    <string name="gorontalo">Gorontalo</string>
+    <string name="kali">Kalimantan</string>
+    <string name="sumatra">Sumatra</string>
+    <string name="flores">Flores</string>
+    <string name="manggarai">Manggarai</string>
+    <string name="alor">Alor</string>
+    <string name="rote">Rote</string>
+    <string name="sumba">Sumba</string>
+    <string name="sabu">Sabu</string>
+</resources>
