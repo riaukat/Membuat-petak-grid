@@ -35,24 +35,28 @@ import com.valeriaukat.tambahdaftar.data.DataSource
 import com.valeriaukat.tambahdaftar.model.Topic
 import com.valeriaukat.tambahdaftar.ui.theme.TambahDaftarTheme
 
+// Kelas MainActivity merupakan titik masuk utama aplikasi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Mengaktifkan tampilan edge-to-edge untuk aktivitas
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        // Mengatur tampilan konten aktivitas menggunakan Jetpack Compose
         setContent {
             TambahDaftarTheme {
-                // A surface container using the 'background' color from the theme
+                // Membuat wadah permukaan dengan warna latar belakang dari tema
                 Surface(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .statusBarsPadding(),
-                    color = MaterialTheme.colorScheme.background
+                        .fillMaxSize() // Mengisi ukuran maksimum yang tersedia
+                        .statusBarsPadding(), / Menambahkan padding untuk status bar
+                    color = MaterialTheme.colorScheme.background // Mengatur warna latar belakang
                 ) {
+                    // Menampilkan grid topik dengan padding yang ditentukan
                     TopicGrid(
                         modifier = Modifier.padding(
-                            start = dimensionResource(R.dimen.padding_small),
-                            top = dimensionResource(R.dimen.padding_small),
-                            end = dimensionResource(R.dimen.padding_small),
+                            start = dimensionResource(R.dimen.padding_small), // Padding di sebelah kiri
+                            top = dimensionResource(R.dimen.padding_small), // Padding di bagian atas
+                            end = dimensionResource(R.dimen.padding_small), // Padding di sebelah kanan
                         )
                     )
                 }
@@ -61,57 +65,62 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// Fungsi komposabel untuk menampilkan grid topik
 @Composable
 fun TopicGrid(modifier: Modifier = Modifier) {
+    // Membuat grid vertikal malas dengan kolom tetap
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)),
-        modifier = modifier
+        columns = GridCells.Fixed(2), // Mengatur grid memiliki 2 kolom
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)), // Jarak antara item secara vertikal
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small)), // Jarak antara item secara horizontal
+        modifier = modifier // Menggunakan modifier yang diberikan
     ) {
+        // Menghasilkan TopicCard untuk setiap topik dalam DataSource
         items(DataSource.topics) { topic ->
-            TopicCard(topic)
+            TopicCard(topic) // Menampilkan kartu topik
         }
     }
 }
 
+// Fungsi komposabel untuk menampilkan satu kartu topik
 @Composable
 fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
-    Card {
-        Row {
-            Box {
+    Card { // Membuat kartu untuk mengenkapsulasi konten
+        Row { // Mengatur gambar dan teks dalam tata letak horizontal
+            Box { // Box untuk menampung gambar
                 Image(
-                    painter = painterResource(id = topic.imageRes),
-                    contentDescription = null,
+                    painter = painterResource(id = topic.imageRes), // Memuat sumber daya gambar
+                    contentDescription = null, // Tidak ada deskripsi konten
                     modifier = modifier
-                        .size(width = 68.dp, height = 68.dp)
-                        .aspectRatio(1f),
-                    contentScale = ContentScale.Crop
+                        .size(width = 68.dp, height = 68.dp) // Mengatur ukuran gambar
+                        .aspectRatio(1f), // Mempertahankan rasio aspek
+                    contentScale = ContentScale.Crop // Memotong gambar agar sesuai dengan ukuran
                 )
             }
 
+            // Kolom untuk menampilkan informasi teks tentang topik
             Column {
                 Text(
-                    text = stringResource(id = topic.name),
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = stringResource(id = topic.name), // Mengambil nama topik dari sumber daya
+                    style = MaterialTheme.typography.bodyMedium, // Mengatur gaya tipografi
                     modifier = Modifier.padding(
-                        start = dimensionResource(R.dimen.padding_medium),
-                        top = dimensionResource(R.dimen.padding_medium),
-                        end = dimensionResource(R.dimen.padding_medium),
-                        bottom = dimensionResource(R.dimen.padding_small)
+                        start = dimensionResource(R.dimen.padding_medium), // Padding di sebelah kiri
+                        top = dimensionResource(R.dimen.padding_medium), // Padding di bagian atas
+                        end = dimensionResource(R.dimen.padding_medium), // Padding di sebelah kanan
+                        bottom = dimensionResource(R.dimen.padding_small) // Padding di bagian bawah
                     )
                 )
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(verticalAlignment = Alignment.CenterVertically) { // Baris untuk ikon dan jumlah kursus yang tersedia
                     Icon(
-                        painter = painterResource(R.drawable.ic_grain),
-                        contentDescription = null,
+                        painter = painterResource(R.drawable.ic_grain), // Memuat sumber daya ikon
+                        contentDescription = null, // Tidak ada deskripsi konten
                         modifier = Modifier
-                            .padding(start = dimensionResource(R.dimen.padding_medium))
+                            .padding(start = dimensionResource(R.dimen.padding_medium)) // Padding di sebelah kiri
                     )
                     Text(
-                        text = topic.availableCourses.toString(),
-                        style = MaterialTheme.typography.labelMedium,
-                        modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_small))
+                        text = topic.availableCourses.toString(), // Mengonversi jumlah kursus yang tersedia menjadi string
+                        style = MaterialTheme.typography.labelMedium, // Mengatur gaya tipografi
+                        modifier = Modifier.padding(start = dimensionResource(R.dimen.padding_small)) // Padding di sebelah kiri
                     )
                 }
             }
@@ -119,17 +128,19 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
     }
 }
 
+// Fungsi preview untuk memvisualisasikan TopicCard dalam pratinjau desain
 @Preview(showBackground = true)
 @Composable
 fun TopicPreview() {
     TambahDaftarTheme {
+        // Membuat topik contoh untuk pratinjau
         val topic = Topic(R.string.tambahdata1, 321, R.drawable.kefa)
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxSize(), // Mengisi ukuran yang tersedia
+            verticalArrangement = Arrangement.Center, // Memusatkan secara vertikal
+            horizontalAlignment = Alignment.CenterHorizontally // Memusatkan secara horizontal
         ) {
-            TopicCard(topic = topic)
+            TopicCard(topic = topic) // Menampilkan kartu topik dalam pratinjau
         }
     }
 }
